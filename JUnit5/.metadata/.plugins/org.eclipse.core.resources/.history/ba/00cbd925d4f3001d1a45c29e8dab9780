@@ -1,0 +1,21 @@
+package com.example;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class NestedClass {
+
+	@Nested
+	public class testTestFactory
+	{
+		@TestFactory
+		Collection<DynamicTest> dynamicTestsWithCollection() {
+		    return Arrays.asList(
+		      DynamicTest.dynamicTest("Add test",
+		        () -> assertEquals(2, Math.addExact(1, 1))),
+		      DynamicTest.dynamicTest("Multiply Test",
+		        () -> assertEquals(4, Math.multiplyExact(2, 2))));
+		}
+	}
+}

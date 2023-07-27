@@ -1,0 +1,9 @@
+package com.Junit.suite;
+
+public class Calculator {
+
+	public void Add()
+	{
+		System.out.println(2+2);
+	}
+}

@@ -1,0 +1,106 @@
+package com.JUnit.Webclient;
+
+import com.JUnit.Webclient.entity.*;
+import com.JUnit.Webclient.service.ProductService;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import io.netty.handler.codec.http.HttpHeaders;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.util.List;
+
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+
+import com.JUnit.Webclient.controller.ProductController;
+
+@TestMethodOrder(OrderAnnotation.class)
+@SpringBootTest
+class CurdOprationApplicationTests {
+
+	private ProductController productController;
+	private ProductService service;
+
+	@Test
+	void contextLoads() {
+	}
+
+	WebClient webClient = WebClient.create();
+	private Product product;
+	
+
+	@Order(1)
+	@Test
+	public void addProduct() {
+		/*
+		 * product.setId(1); product.setName("Keyboard");
+		 * 
+		 */
+		Product product = new Product();
+		
+		product.setId(1);
+		product.setName("Keyboard");
+		product.setPrice(1200);
+		product.setQuantity(4);
+		
+		List<Product> addProduct = webClient.post().uri("/addproduct")
+				.body(product.toString()))
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(List.class).block();
+		
+		/*
+		 * List<Product> addProduct = webClient.post().uri("/addproduct")
+		 * .body(BodyInserters.fromPublisher(Mono.just("addProduct"), String.class))
+		 * .accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(List.class).block()
+		 * ;
+		 */
+
+		System.out.println("Our Products:......");
+
+		System.out.println(productController.addProduct(product));
+	}
+
+	@Test
+	public void getProducts() {
+
+		Flux<Product> getProducts = webClient.get().uri("/products").retrieve().bodyToFlux(Product.class);
+
+		System.out.println("Total products are: " + getProducts);
+		/*
+		 * List<Product> productMap = productController.findAllProducts();
+		 * System.out.println("Hi..."); System.out.println(productMap);
+		 */
+	}
+
+	
+	   @Test
+	  public void getProductById() { 
+		   int id =1;
+		   Mono<Product> getProductById =webClient.get() 
+				   .uri("/product/"+product.getId()) 
+				   .retrieve()
+	               .bodyToMono(Product.class);
+	  System.out.println("Products are: "+getProductById); }
+	 
+
+	@Test
+	public void updateProductById(Product product) {
+		Mono<Product> updateProduct = webClient.put()
+				.uri("/update")
+				.retrieve()
+				.bodyToMono(Product.class);
+	}
+
+	@Test
+	public void deleteProductById() {
+		int id = 2;
+		Mono<Void> deleteProduct = webClient.delete().uri("/delete/" + id).retrieve().bodyToMono(Void.class);
+	}
+
+}

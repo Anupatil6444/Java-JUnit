@@ -1,0 +1,31 @@
+package com.example.demo;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class TestFactoryApplicationTests {
+    
+	@Nested
+	   class Test1
+	   {
+		@Test
+		public void print()
+		{
+			assertEquals(2,2);
+		}
+	   }
+	  
+	@Nested
+	   class Test2
+	   {
+		@Test
+		public void print1()
+		{
+			assertEquals(2,2);
+		}
+	   }
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun addProduct()" project="Webclient.crudOpration" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.JUnit.Webclient.CurdOprationApplicationTests" time="2.272" displayname="CurdOprationApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.JUnit.Webclient.CurdOprationApplicationTests]">
+    <testcase name="addProduct" classname="com.JUnit.Webclient.CurdOprationApplicationTests" time="2.272" displayname="addProduct()" uniqueid="[engine:junit-jupiter]/[class:com.JUnit.Webclient.CurdOprationApplicationTests]/[method:addProduct()]"/>
+  </testsuite>
+</testrun>
